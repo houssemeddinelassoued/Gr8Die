@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="roll_result">#FF8800</color>
+    <color name="title_background">#FF8800</color>
+    <color name="title_foreground">#000000</color>
+    <color name="roll_name">#FFFFFF</color>
+    <color name="roll_background">#000000</color>
+    
+</resources>

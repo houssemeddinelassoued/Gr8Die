@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="roll_btn">Roll</string>
+    <string name="app_name">Gr8Die</string>
+    <string name="no_dice">No dice defined.</string>
+    <string name="before_roll">Choose die to roll</string>
+    <string name="menu_add_die">New die</string>
+    <string name="menu_delete_die">Delete die</string>
+    <string name="new_from">From</string>
+    <string name="new_to">To</string>
+    <string name="new_count">Count</string>
+    <string name="new_sumup">Sum results</string>
+    <string name="new_hide_all">Show only the sum</string>
+    <string name="new_dice">Add new die</string>
+    <string name="edit_die">Edit die</string>
+    <string name="menu_edit">Edit die</string>
+    <string name="menu_group">Switch group</string>
+    <string name="menu_groups">Manage groups</string>
+</resources>
