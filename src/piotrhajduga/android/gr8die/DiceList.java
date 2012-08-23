@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -17,12 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class DiceList extends ListActivity {
-	
-	private static final int ADD_ID = Menu.FIRST;
-	private static final int DELETE_ID = Menu.FIRST + 1;
-	private static final int EDIT_ID = Menu.FIRST + 2;
-	//private static final int GROUP_ID = Menu.FIRST + 2;
-	//private static final int GROUPS_ID = Menu.FIRST + 3;
 	
 	private DiceDbAdapter mDbHelper;
 	private Cursor mCursor;
@@ -34,6 +29,7 @@ public class DiceList extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.string.app_name);
         setContentView(R.layout.dice_list);
         rollName = (TextView) findViewById(R.id.roll);
         rollResult = (TextView) findViewById(R.id.roll_result);
@@ -49,14 +45,9 @@ public class DiceList extends ListActivity {
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	boolean result = super.onCreateOptionsMenu(menu);
-    	MenuItem menuItem = menu.add(0, ADD_ID, 0, R.string.menu_add_die);
-    	menuItem.setIcon(R.drawable.new_die);
-    	//menuItem = menu.add(0, GROUP_ID, 0, R.string.menu_group);
-    	//menuItem.setIcon(R.drawable.group);
-    	//menuItem = menu.add(0, GROUPS_ID, 0, R.string.menu_groups);
-    	//menuItem.setIcon(R.drawable.manage_groups);
-    	return result;
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.main, menu);
+    	return super.onCreateOptionsMenu(menu);
     }
     
     @Override
@@ -65,10 +56,8 @@ public class DiceList extends ListActivity {
     	super.onCreateContextMenu(menu, v, menuInfo);
     	AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
     	menu.setHeaderTitle(getDiceName(info.position));
-    	MenuItem menuItem = menu.add(0, EDIT_ID, 0, R.string.menu_edit);
-    	menuItem.setIcon(R.drawable.edit);
-    	menuItem = menu.add(0, DELETE_ID, 0, R.string.menu_delete_die);
-    	menuItem.setIcon(R.drawable.delete);
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.elem, menu);
     }
     
     private String getDiceName(int position) {
@@ -85,7 +74,7 @@ public class DiceList extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch (item.getItemId()) {
-    	case ADD_ID:
+    	case R.id.menu_new_die:
     		addDie();
     		return true;
     	}
@@ -129,11 +118,11 @@ public class DiceList extends ListActivity {
 		AdapterContextMenuInfo info =
 			(AdapterContextMenuInfo) item.getMenuInfo();
     	switch(item.getItemId()) {
-    	case DELETE_ID:
+    	case R.id.dice_delete:
     		deleteDie(info.id);
     		fillData();
     		return true;
-    	case EDIT_ID:
+    	case R.id.dice_edit:
     		mCursor.moveToPosition(info.position);
     		editDie(mCursor.getInt(mCursor.getColumnIndex(DiceDbAdapter.KEY_DIE_ROWID)));
     		return true;
@@ -156,13 +145,6 @@ public class DiceList extends ListActivity {
 		mDbHelper.deleteDie(id);
     }
     
-    //@Override
-    //protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-    	//super.onActivityResult(requestCode, resultCode, intent);
-    	//mDbHelper.open();
-    	//fillData();
-    //}
-
 	private void fillData() {
 		mCursor = mDbHelper.fetchAllDice();
 		startManagingCursor(mCursor);
