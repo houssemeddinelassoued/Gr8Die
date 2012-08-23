@@ -103,13 +103,13 @@ public class DiceList extends ListActivity {
     	Boolean sumup = mCursor.getInt(mCursor.getColumnIndex(DiceDbAdapter.KEY_SUMUP)) > 0;
     	Boolean hideall = mCursor.getInt(mCursor.getColumnIndex(DiceDbAdapter.KEY_HIDE_ALL)) > 0;
     	
-    	rollName.setText(count+(sumup?"d":"D")+new Integer(to-from+1) +
+    	rollName.setText(count+(sumup?"d":"D")+Integer.valueOf(to-from+1) +
     			" <" + from + ":" + to + ">");
     	
     	Vector<Integer> results = new Vector<Integer>();
     	Random random = new Random();
     	while (count-->0) {
-    		results.add(new Integer(random.nextInt(to-from+1)+from));
+    		results.add(Integer.valueOf(random.nextInt(to-from+1)+from));
     	}
     	String result = "";
     	Integer sum = 0;

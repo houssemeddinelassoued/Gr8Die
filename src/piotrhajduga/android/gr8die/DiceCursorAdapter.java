@@ -22,7 +22,7 @@ public class DiceCursorAdapter extends CursorAdapter {
 		Boolean sumup = cursor.getInt(cursor.getColumnIndex(DiceDbAdapter.KEY_SUMUP))>0;
 		TextView dice = (TextView) view.findViewById(R.id.dice);
 		TextView dice_range = (TextView) view.findViewById(R.id.dice_range);
-		String text = count + (sumup?"d":"D") + new Integer(to-from+1);
+		String text = count + (sumup?"d":"D") + Integer.valueOf(to-from+1);
 		dice.setText(text);
 		text = "<" + from + ":" + to + ">";
 		dice_range.setText(text);

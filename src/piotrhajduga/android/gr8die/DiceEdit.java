@@ -89,9 +89,9 @@ public class DiceEdit extends Activity {
 		Cursor c = mDbHelper.fetchDie(mRowId);
 		if(c==null) return;
 		c.moveToFirst();
-		from.setText(new Integer(c.getInt(c.getColumnIndex(DiceDbAdapter.KEY_FROM))).toString());
-		to.setText(new Integer(c.getInt(c.getColumnIndex(DiceDbAdapter.KEY_TO))).toString());
-		count.setText(new Integer(c.getInt(c.getColumnIndex(DiceDbAdapter.KEY_COUNT))).toString());
+		from.setText(Integer.valueOf(c.getInt(c.getColumnIndex(DiceDbAdapter.KEY_FROM))).toString());
+		to.setText(Integer.valueOf(c.getInt(c.getColumnIndex(DiceDbAdapter.KEY_TO))).toString());
+		count.setText(Integer.valueOf(c.getInt(c.getColumnIndex(DiceDbAdapter.KEY_COUNT))).toString());
 		sumup.setChecked(c.getInt(c.getColumnIndex(DiceDbAdapter.KEY_SUMUP))>0);
 		hideall.setVisibility(sumup.isChecked()?View.VISIBLE:View.INVISIBLE);
 		hideall.setChecked(c.getInt(c.getColumnIndex(DiceDbAdapter.KEY_HIDE_ALL))>0);
